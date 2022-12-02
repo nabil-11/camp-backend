@@ -1,8 +1,9 @@
 var express = require('express');
-const { getAllUsers, getUser, createUser, deleteUser, updateUser } = require('../controllers/user.controller');
+const { getAllUsers, getUser, createUser, deleteUser, updateUser, registrer,login } = require('../controllers/user.controller');
 const validate = require('../middlewares/validator');
 var router = express.Router();
-
+router.post('/registrer',registrer);
+router.post('/login',login);
 router.get('/', getAllUsers);
 router.get('/:userId', getUser);
 router.post('/', validate, createUser);

@@ -9,6 +9,7 @@ const eventRouter = require("./routes/events");
 var usersRouter = require("./routes/users");
 const cors = require('cors')
 var app = express();
+require("dotenv").config();
 db.sequelize
   .sync()
   .then(() => {
