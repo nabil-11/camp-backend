@@ -1,11 +1,11 @@
 var {event} = require('../models')
 
 const createevent = async (req, res, next) => {
-  const {Gov_depart, Deleg_depart, Lieu_Exact_depart,Gov_dist,Deleg_dist,Lieu_Exact_dist,nbr,date_depart} = req.body;
+  const {Gov_depart, Deleg_depart, Lieu_Exact_depart,Gov_dist,Deleg_dist,Lieu_Exact_dist,nbr,date_depart,user_id} = req.body;
  console.log(req.body)
   try {
     const createdevent = await event.create({
-      Gov_depart, Deleg_depart, Lieu_Exact_depart,Gov_dist,Deleg_dist,Lieu_Exact_dist,etat:true,nbr,date_depart
+      Gov_depart, Deleg_depart, Lieu_Exact_depart,Gov_dist,Deleg_dist,Lieu_Exact_dist,etat:true,nbr,date_depart,user_id
     });
     res.status(201).json({
       createdevent
@@ -18,15 +18,14 @@ const createevent = async (req, res, next) => {
 };
 const getevent = async (req, res) => {
   try {
-    const { eventId } = req.params;
     const eventData = await event.findOne({
-      where: { id: eventId },
+      where: { etat: true },
     });
     if (!eventData) {
       throw new Error("Event not found");
     }
     res.status(200).json({
-      eventData,
+      eventData
     });
   } catch (error) {
     res.status(500).json({

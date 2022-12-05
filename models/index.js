@@ -20,7 +20,24 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.event = require("./event.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
+db.media = require("./media.model")(sequelize,Sequelize)
+db.event.hasMany(db.media , {
+  foreignKey:{ name:'event_id' ,allowNull:false},
+  as: 'eventMedia'
+} )
+db.media.belongsTo(db.event, {
+  foreignKey: {name:'event_id',allowNull:false},
+  as: 'media'
+})
 
+db.event.belongsTo(db.user, {
+  foreignKey: { name:'user_id',  allowNull: false },
+  as: 'userEvent'
+})
+db.user.hasMany(db.event , {
+  foreignKey: {name:'user_id',allowNull:false},
+  as: 'EventUser'
+} )
 
 
 module.exports = db;

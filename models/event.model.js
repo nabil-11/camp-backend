@@ -1,3 +1,4 @@
+const Media = require('./media.model')
 
 module.exports = (sequelize, Sequelize) => {
     const Event = sequelize.define("event", {
@@ -28,11 +29,13 @@ module.exports = (sequelize, Sequelize) => {
        date_depart: {
         type:  Sequelize.DATE    ,
       },
-      userId: {
-        type:  Sequelize.INTEGER    ,
-      },
+      user_id :{
+        type: Sequelize.INTEGER ,
+        allowNull : false
+      }
     });
   
+
     return Event;
   };
   
