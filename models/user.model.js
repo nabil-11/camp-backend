@@ -9,6 +9,10 @@ module.exports = (sequelize, Sequelize) => {
     password: {
       type: Sequelize.STRING,
     },
+    role: {
+      type: Sequelize.ENUM ('CLIENT','ADMIN'),
+      defaultValue: "CLIENT",
+    },
     token: {
       type: Sequelize.STRING,
     },

@@ -1,9 +1,9 @@
 var {event} = require('../models')
 
 const createevent = async (req, res, next) => {
-  const {Gov_depart, Deleg_depart, Lieu_Exact_depart,Gov_dist,Deleg_dist,Lieu_Exact_dist,nbr,date_depart,user_id} = req.body;
- console.log(req.body)
-  try {
+  const {Gov_depart, Deleg_depart, Lieu_Exact_depart,Gov_dist,Deleg_dist,Lieu_Exact_dist,nbr,date_depart} = req.body;
+  const {user_id}=req.user
+  try { 
     const createdevent = await event.create({
       Gov_depart, Deleg_depart, Lieu_Exact_depart,Gov_dist,Deleg_dist,Lieu_Exact_dist,etat:true,nbr,date_depart,user_id
     });

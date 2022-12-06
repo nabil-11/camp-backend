@@ -14,7 +14,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     idle: dbConfig.pool.idle
   }
 });
-
+ 
 const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
@@ -29,6 +29,8 @@ db.media.belongsTo(db.event, {
   foreignKey: {name:'event_id',allowNull:false},
   as: 'media'
 })
+db.contact = require("./contact.model")(sequelize, Sequelize);
+
 
 db.event.belongsTo(db.user, {
   foreignKey: { name:'user_id',  allowNull: false },
