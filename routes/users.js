@@ -6,7 +6,7 @@ var router = express.Router();
 router.post('/login',login);
 router.get('/fetch', getAllUsers);
 router.get('/:userId', getUser);
-router.post('/registrer',  createUser);
+router.post('/signup',  createUser);
 router.put('/:userId', validate, updateUser);
 router.delete('/:userId', deleteUser);
 

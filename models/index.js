@@ -20,6 +20,8 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.event = require("./event.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
+db.centre = require("./centre.model.js")(sequelize, Sequelize);
+db.commentaire = require("./commentaire.model.js")(sequelize, Sequelize);
 db.media = require("./media.model")(sequelize,Sequelize)
 db.event.hasMany(db.media , {
   foreignKey:{ name:'event_id' ,allowNull:false},

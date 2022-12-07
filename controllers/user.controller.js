@@ -10,6 +10,7 @@ const createUser = async (req, res, next) => {
   try {
     // Get user input
     const { name, email, password } = req.body;
+    console.log(req.body)
 
     // Validate user input
     if (!(email && password && name)) {
@@ -120,11 +121,7 @@ const getAllUsers = async (req, res) => {
     });
   }
 };
-const isAdmin = async(req,res)=>{
-const {role} = req.user
-console.log(role)
-   
-}
+
 
 const login = async (req, res) => {
 
