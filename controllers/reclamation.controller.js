@@ -1,5 +1,41 @@
-const { contact } = require("../models");
+const { contact, notification } = require("../models");
 
+
+const createContact = async (req, res, next) => {
+  const { name, email, subject, message } = req.body;
+  const contenu ='utilisateur envoyer un reclmation' ;
+  const type= 'danger';
+  try {
+    const createContact = await contact.create({
+      name,
+      email,
+      subject,
+      message,
+    });
+
+    const noty = await notification.create({ 
+      contenu,
+      type,
+    });
+
+     
+    res.status(200).json({
+        createContact,
+    });
+
+    res.status(200).json({
+      noty,
+  });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+
+
+
+  
+};
 
 const getAllReclamations = async (req, res) => {
     try {
@@ -37,7 +73,8 @@ const getAllReclamations = async (req, res) => {
   module.exports = {
   
     getAllReclamations,
-    deleteReclamatrions
+    deleteReclamatrions,
+    createContact
    
   };
   

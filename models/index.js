@@ -21,6 +21,7 @@ db.Sequelize = Sequelize;
 db.event = require("./event.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.contact = require("./contact.model")(sequelize, Sequelize);
+db.notification = require("./notification.model")(sequelize, Sequelize);
 
 
 

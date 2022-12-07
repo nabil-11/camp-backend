@@ -2,6 +2,25 @@ const { user } = require("../models");
 const bcrypt = require('bcryptjs')
 const jwt = require("jsonwebtoken");
 
+
+const countusers = async (req, res) => {
+  try {
+ 
+    const countData = await user.count({
+      where: { role: '0' },
+    });
+    res.status(200).json({
+      countData,
+    });
+    console.log(countData)
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+
 const createUser = async (req, res, next) => {
   
   // Our register logic starts here
@@ -49,7 +68,6 @@ const createUser = async (req, res, next) => {
     console.log(err);
   }
 };
-
 const getUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -161,5 +179,6 @@ module.exports = {
   updateUser,
   deleteUser,
   getAllUsers,
-  login
+  login,
+  countusers
 };

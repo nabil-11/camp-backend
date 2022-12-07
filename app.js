@@ -8,6 +8,7 @@ const db = require("./models/index");
 const eventRouter = require("./routes/events");
 var usersRouter = require("./routes/users");
 var reclRouter = require("./routes/reclamation");
+var notyRouter = require("./routes/notification");
 const cors = require('cors')
 var app = express();
 require("dotenv").config();
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/users", usersRouter);
 app.use("/events", eventRouter);
 app.use("/reclamations", reclRouter);
+app.use("/notifications", notyRouter);
 
 
 // catch 404 and forward to error handler
