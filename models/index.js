@@ -20,6 +20,7 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.event = require("./event.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
+db.transport = require("./transport.model.js")(sequelize, Sequelize);
 
 
 
