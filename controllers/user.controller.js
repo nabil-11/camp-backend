@@ -120,6 +120,11 @@ const getAllUsers = async (req, res) => {
     });
   }
 };
+const isAdmin = async(req,res)=>{
+const {role} = req.user
+console.log(role)
+   
+}
 
 const login = async (req, res) => {
 
