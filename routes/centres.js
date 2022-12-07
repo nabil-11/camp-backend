@@ -1,8 +1,8 @@
 var express = require('express');
-const {  getCentre, createCentre, deleteCentre, updateCentre } = require('../controllers/centre.controller');
+const {  getAllCentres, createCentre, deleteCentre, updateCentre } = require('../controllers/centre.controller');
 var router = express.Router();
 
-router.get('/:id', getCentre);
+router.get('/affichercentre', getAllCentres);
 router.post('/ajoutercentre', createCentre);
 router.put('/:id',updateCentre);
 router.delete('/:id', deleteCentre);

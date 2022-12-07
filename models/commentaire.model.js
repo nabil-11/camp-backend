@@ -3,7 +3,7 @@ module.exports = (sequelize, Sequelize) => {
       contenu: {
         type: Sequelize.STRING},
         centreId :{
-          type:Sequelize.INTEGER
+          type:Sequelize.INTEGER,
         },
      
     });

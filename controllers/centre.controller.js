@@ -1,14 +1,14 @@
 const { centre } = require("../models");
 
 const createCentre = async (req, res, next) => {
-  const { Gov, Deleg, LieuExact,Langitude,Lantitude } = req.body;
+  const { Gov, Deleg, LieuExact,Langitude,lantitude } = req.body;
   try {
     const createCentre = await centre.create({
       Gov,
       Deleg,
       LieuExact,
       Langitude,
-      Lantitude,
+      lantitude,
 
     });
     res.status(201).json({
@@ -20,17 +20,14 @@ const createCentre = async (req, res, next) => {
     });
   }
 };
-const getCentre = async (req, res) => {
+const getAllCentres = async (req, res) => {
   try {
-    const { id } = req.params;
-    const centreData = await centre.findOne({
-      where: { id: id },
-    });
-    if (!centreData) {
-      throw new Error("Centre not found");
+    const centres = await centre.findAll();
+    if(!centres){
+        throw new Error("No centre found");
     }
     res.status(200).json({
-      centreData,
+      centres,
     });
   } catch (error) {
     res.status(500).json({
@@ -38,6 +35,7 @@ const getCentre = async (req, res) => {
     });
   }
 };
+ 
 const updateCentre = async (req, res) => {
   try {
     const { id } = req.params;
@@ -75,7 +73,7 @@ const deleteCentre= async (req, res) => {
 };
 module.exports = {
   createCentre,
-  getCentre,
+  getAllCentres,
   updateCentre,
   deleteCentre,
 };
