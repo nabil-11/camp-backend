@@ -19,8 +19,6 @@ const countusers = async (req, res) => {
     });
   }
 };
-
-
 const createUser = async (req, res, next) => {
   
   // Our register logic starts here
@@ -136,7 +134,6 @@ const getAllUsers = async (req, res) => {
     });
   }
 };
-
 const login = async (req, res) => {
 
   // Our login logic starts here

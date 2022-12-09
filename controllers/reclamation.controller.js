@@ -20,22 +20,35 @@ const createContact = async (req, res, next) => {
 
      
     res.status(200).json({
-        createContact,
+        createContact,noty,
     });
 
-    res.status(200).json({
-      noty,
-  });
+   
   } catch (error) {
     res.status(500).json({
       error: error.message,
     });
   }
-
-
-
   
 };
+
+
+const acceptContact = async (req, res) => {
+ 
+    const { userId } = req.params;
+     req.body.etat = "1"
+     
+    const [updated] = await contact.update(req.body,{
+      where: { id: userId  }, 
+    });
+ 
+    if (updated) {
+      const acceptcontact = await contact.findOne({ where: { id: userId } });
+      res.status(200).json({
+        contact: acceptcontact,
+      });
+}
+}
 
 const getAllReclamations = async (req, res) => {
     try {
@@ -70,11 +83,12 @@ const getAllReclamations = async (req, res) => {
     }
   };
 
-  module.exports = {
-  
+  module.exports = {  
+   
     getAllReclamations,
     deleteReclamatrions,
-    createContact
+    createContact,
+    acceptContact
    
   };
   
