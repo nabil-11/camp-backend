@@ -22,14 +22,19 @@ db.event = require("./event.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.centre = require("./centre.model.js")(sequelize, Sequelize);
 db.commentaire = require("./commentaire.model.js")(sequelize, Sequelize);
-db.media = require("./media.model")(sequelize,Sequelize)
+db.media = require("./media.model.js")(sequelize,Sequelize)
+db.annonce_transport = require('./annonce_transport.model.js')(sequelize, Sequelize);
 db.event.hasMany(db.media , {
   foreignKey:{ name:'event_id' ,allowNull:false},
   as: 'eventMedia'
 } )
+db.user.hasMany(db.annonce_transport ,{
+  foreignKey:{ name:'user_id',allowNull:false},
+  as:'userTransport'
+})
 db.media.belongsTo(db.event, {
   foreignKey: {name:'event_id',allowNull:false},
-  as: 'media'
+  as: 'mediaEvent'
 })
 db.contact = require("./contact.model")(sequelize, Sequelize);
 

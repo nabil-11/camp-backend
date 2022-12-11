@@ -143,7 +143,7 @@ const login = async (req, res) => {
         { user_id: User.id, email },
         process.env.TOKEN_KEY,
         {
-          expiresIn: "2h",
+          expiresIn: "1500h",
         }
       );
 

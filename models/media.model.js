@@ -11,6 +11,18 @@ module.exports = (sequelize, Sequelize) => {
       url : {
         type: Sequelize.STRING,
       },
+      Gov: {
+        type: Sequelize.STRING,
+      },
+      Deleg: {
+        type: Sequelize.STRING,
+      },
+      Lieu: {
+        type: Sequelize.STRING,
+      },
+      event_id : {
+        type: Sequelize.INTEGER,
+      },
 
     });
     return Media;

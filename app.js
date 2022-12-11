@@ -11,6 +11,7 @@ const mediaRouter = require('./routes/medias')
 var reclRouter = require("./routes/reclamation");
 var centreRouter = require("./routes/centres");
 var commentaireRouter = require("./routes/commentaires");
+const annonce_transportRouter = require('./routes/annonce_transport')
 const cors = require('cors')
 var app = express();
 require("dotenv").config();
@@ -24,7 +25,7 @@ db.sequelize
   });
 app.use(cors())
 app.use(logger("dev"));
-app.use(express.json());
+app.use(express.json({limit:1000000}));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
@@ -33,6 +34,8 @@ app.use("/users", usersRouter);
 app.use("/events", eventRouter);
 app.use("/centres", centreRouter);
 app.use("/commentaires", commentaireRouter);
+app.use('/media',mediaRouter)
+app.use('/transport',annonce_transportRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
