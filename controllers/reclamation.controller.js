@@ -69,13 +69,28 @@ const getAllReclamations = async (req, res) => {
   const deleteReclamatrions = async (req, res) => {
     try {
       const { userId } = req.params;
+        const contenu ='utilisateur supprimer un reclmation' ;
+        const type= 'danger';
+
       const deleted = await contact.destroy({
         where: { id: userId },
       });
+
       if (!deleted) {
         throw new Error("User not found");
       }
+
+      const noty = await notification.create({ 
+        contenu,
+        type,
+      });
+      
+       res.status(200).json({
+       noty,
+      });
+
       res.status(204).send("User deleted");
+
     } catch (error) {
       res.status(500).json({
         error: error.message,

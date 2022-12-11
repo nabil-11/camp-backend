@@ -69,6 +69,7 @@ const deleteevent = async (req, res) => {
     });
   }
 };
+
 const getAllevents = async (req, res) => {
   try {
     const events = await event.findAll();
@@ -84,10 +85,27 @@ const getAllevents = async (req, res) => {
     });
   }
 };
+
+
+const countEvents = async (req, res) => {
+  try {
+ 
+    const countEvent= await event.count({});
+    res.status(200).json({
+      countEvent,
+    });
+    console.log(countEvent)
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
 module.exports = {
   createevent,
   getevent,
   updateevent,
   deleteevent,
   getAllevents,
+  countEvents
 };
