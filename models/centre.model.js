@@ -1,22 +1,20 @@
 module.exports = (sequelize, Sequelize) => {
     const Centre = sequelize.define("centre", {
-      Gov: {
+      gov: {
         type: Sequelize.STRING,
       },
-      Deleg: {
+      deleg: {
         type: Sequelize.STRING,
       },
-      LieuExact: {
+      lieu_exact: {
         type: Sequelize.STRING,
       },
-      Langitude: {
+      nbr: {
         type: Sequelize.STRING,
       },
-      lantitude: {
-        type: Sequelize.STRING,
-      },
+      
     });
-  
+    
     return Centre;
   };
   

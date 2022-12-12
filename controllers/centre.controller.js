@@ -1,30 +1,38 @@
 const { centre } = require("../models");
 
+
 const createCentre = async (req, res, next) => {
-  const { Gov, Deleg, LieuExact,Langitude,lantitude } = req.body;
+  const { gov, deleg, lieu_exact, nbr } = req.body;
+
   try {
     const createCentre = await centre.create({
-      Gov,
-      Deleg,
-      LieuExact,
-      Langitude,
-      lantitude,
+        gov,
+        deleg,
+        lieu_exact,
+        nbr,
+    });
 
+
+     
+    res.status(200).json({
+        createCentre,
     });
-    res.status(201).json({
-      createCentre,
-    });
+
+   
   } catch (error) {
     res.status(500).json({
       error: error.message,
     });
   }
+  
 };
-const getAllCentres = async (req, res) => {
+
+
+const getAllCentre = async (req, res) => {
   try {
     const centres = await centre.findAll();
     if(!centres){
-        throw new Error("No centre found");
+        throw new Error("No centres found");
     }
     res.status(200).json({
       centres,
@@ -35,34 +43,31 @@ const getAllCentres = async (req, res) => {
     });
   }
 };
- 
+
+
 const updateCentre = async (req, res) => {
+  const { userId } = req.params;
+  
+ const [updated] = await centre.update(req.body,{
+   where: { id: userId  }, 
+ });
+
+ if (updated) {
+   const datas = await centre.findOne({ where: { id: userId } });
+   res.status(200).json({
+    centre: datas,
+   });
+}
+}
+
+const deleteCentre = async (req, res) => {
   try {
-    const { id } = req.params;
-    const [updated] = await centre.update(req.body, {
-      where: { id: id },
-    });
-    if (updated) {
-      const updatedCentre = await centre.findOne({ where: { id: id } });
-      res.status(200).json({
-        centre: updatedCentre,
-      });
-    }
-    throw new Error("Centre not found");
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
-  }
-};
-const deleteCentre= async (req, res) => {
-  try {
-    const { id } = req.params;
+    const { userId } = req.params;
     const deleted = await centre.destroy({
-      where: { id: id },
+      where: { id: userId },
     });
     if (!deleted) {
-      throw new Error("Centre not found");
+      throw new Error("updatedCentre not found");
     }
     res.status(204).send("Centre deleted");
   } catch (error) {
@@ -71,9 +76,30 @@ const deleteCentre= async (req, res) => {
     });
   }
 };
-module.exports = {
+
+
+const countCentres = async (req, res) => {
+  try {
+ 
+    const countCentre = await centre.count({});
+    res.status(200).json({
+      countCentre,
+    });
+    console.log(countCentre)
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
+
+ 
+
+module.exports = {  
   createCentre,
-  getAllCentres,
+  getAllCentre,
   updateCentre,
   deleteCentre,
+  countCentres
 };
+  

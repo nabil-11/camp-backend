@@ -4,6 +4,24 @@ const jwt = require("jsonwebtoken");
 
 
 
+
+
+const countusers = async (req, res) => {
+  try {
+ 
+    const countData = await user.count({
+      where: { role: '0' },
+    });
+    res.status(200).json({
+      countData,
+    });
+    console.log(countData)
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+};
 const createUser = async (req, res, next) => {
   
   // Our register logic starts here
@@ -52,7 +70,6 @@ const createUser = async (req, res, next) => {
     console.log(err);
   }
 };
-
 const getUser = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -108,12 +125,12 @@ const deleteUser = async (req, res) => {
 };
 const getAllUsers = async (req, res) => {
   try {
-    const users = await user.findAll( {where: { role: '0'}} );
+    const users = await user.findAll( {where: { role: 'CLIENT'}} );
     if(!users){
         throw new Error("No users found");
     }
     res.status(200).json({
-      users,
+      users
     });
   } catch (error) {
     res.status(500).json({
@@ -121,7 +138,6 @@ const getAllUsers = async (req, res) => {
     });
   }
 };
-
 
 const login = async (req, res) => {
 
@@ -165,5 +181,6 @@ module.exports = {
   updateUser,
   deleteUser,
   getAllUsers,
-  login
+  login,
+  countusers
 };

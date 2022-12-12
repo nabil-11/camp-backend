@@ -37,8 +37,13 @@ db.media.belongsTo(db.event, {
   as: 'mediaEvent'
 })
 db.contact = require("./contact.model")(sequelize, Sequelize);
-
-
+db.notification = require("./notification.model")(sequelize, Sequelize);
+db.centre = require("./centre.model")(sequelize, Sequelize);
+db.participant = require("./participant.model")(sequelize,Sequelize)
+ db.annonce_transport.hasMany(db.participant , {
+  foreignKey: {name:'event_id',allowNull:false},
+  as : 'participant_event'
+ })
 db.event.belongsTo(db.user, {
   foreignKey: { name:'user_id',  allowNull: false },
   as: 'userEvent'

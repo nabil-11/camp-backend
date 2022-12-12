@@ -9,9 +9,11 @@ const eventRouter = require("./routes/events");
 var usersRouter = require("./routes/users");
 const mediaRouter = require('./routes/medias')
 var reclRouter = require("./routes/reclamation");
-var centreRouter = require("./routes/centres");
 var commentaireRouter = require("./routes/commentaires");
 const annonce_transportRouter = require('./routes/annonce_transport')
+var notyRouter = require("./routes/notification");
+var centreRouter = require("./routes/centre");
+const participantRouter = require('./routes/participant')
 const cors = require('cors')
 var app = express();
 require("dotenv").config();
@@ -36,6 +38,11 @@ app.use("/centres", centreRouter);
 app.use("/commentaires", commentaireRouter);
 app.use('/media',mediaRouter)
 app.use('/transport',annonce_transportRouter)
+app.use("/reclamations", reclRouter);
+app.use("/notifications", notyRouter);
+app.use("/centres", centreRouter);
+app.use("/participant",participantRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
