@@ -19,12 +19,14 @@ const createevent = async (req, res, next) => {
 const getevent = async (req, res) => {
   try {
     const eventData = await event.findOne({
-      where: { etat: true },
+      where: { etat: true } , include :"event_participant"
     });
+    console.log(eventData)
     if (!eventData) {
       throw new Error("Event not found");
     }
-    res.status(200).json({
+
+   return  res.status(200).json({
       eventData
     });
   } catch (error) {

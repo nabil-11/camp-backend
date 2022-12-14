@@ -41,9 +41,13 @@ db.notification = require("./notification.model")(sequelize, Sequelize);
 db.centre = require("./centre.model")(sequelize, Sequelize);
 db.participant = require("./participant.model")(sequelize,Sequelize)
  db.annonce_transport.hasMany(db.participant , {
-  foreignKey: {name:'event_id',allowNull:false},
-  as : 'participant_event'
+  foreignKey: {name:'transport_id',allowNull:false},
+  as : 'participant_transport '
  })
+db.event.hasOne(db.participant , {
+  foreignKey:{ name:'event_id',allowNull:false},
+  as: "event_participant"
+})
 db.event.belongsTo(db.user, {
   foreignKey: { name:'user_id',  allowNull: false },
   as: 'userEvent'

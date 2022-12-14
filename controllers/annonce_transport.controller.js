@@ -42,6 +42,22 @@ const findTransport = async(req,res)=>{
         }
       
     }
+    const annulerTransport = async (req, res) => {
+        try {
+          const { transport_id } = req.params;
+          const deleted = await annonce_transport.destroy({
+            where: { id: transport_id },
+          });
+          if (!deleted) {
+            throw new Error("transport not found");
+          }
+          res.status(204).send("transport deleted");
+        } catch (error) {
+          res.status(500).json({
+            error: error.message,
+          });
+        }
+      };
 module.exports ={
-    addTransport,findTransport ,findTransportByUser
+    addTransport,findTransport ,findTransportByUser , annulerTransport
 }

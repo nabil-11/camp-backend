@@ -1,6 +1,12 @@
 const {media} = require('../models')
 const cloudinary = require("../config/cloudinary.config");
 
+const getAllMedia = async(req,res)=>{
+  const  medias = await media.findAll()
+  if (medias) return res.status(200).json({medias})
+  return res.status(500).json({error:" media n'existe pas"})
+} 
+
 const getMedia = async (req, res) => {
     try {
       const { eventId } = req.params;
@@ -53,6 +59,23 @@ const getMedia = async (req, res) => {
       });
     }
   };
+  const deleteMedia =  async (req,res)=>{
+    try {
+      const { media_id } = req.params;
+      const deleted = await media.destroy({
+        where: { id: media_id },
+      });
+      if (!deleted) {
+        throw new Error("media not found");
+      }
+      res.status(204).send("media deleted");
+    } catch (error) {
+      res.status(500).json({
+        error: error.message,
+      });
+    }
+    
+  }
    module.exports ={
-    getMedia,createMedia,getMediaEvent
+    getMedia,createMedia,getMediaEvent,getAllMedia,deleteMedia
    }
