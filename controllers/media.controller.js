@@ -54,6 +54,7 @@ const getMedia = async (req, res) => {
         createM
       });
     } catch (error) {
+      console.log(error)
       res.status(500).json({
         error: error.message,
       });
